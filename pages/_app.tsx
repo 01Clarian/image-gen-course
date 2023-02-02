@@ -59,7 +59,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return <div className="app-main">
-    <h2>Create Images With Your Mind</h2>
+    <h2>Create Images With Your Imagination</h2>
     <textarea
       className="app-input"
       placeholder="Create any type of image you can think of with 
