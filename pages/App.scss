@@ -1,0 +1,88 @@
+$shooting-time: 5000ms;
+
+.shooting_star {
+    opacity: .3;
+    position: absolute;
+    left: 50%;
+    top: 50;
+    height:2px;
+    background: linear-gradient(-45deg, rgba(58, 167, 226, 1), rgba(33, 96, 130, 0));
+    border-radius:999px;
+    filter:drop-shadow(0 0 6px rgb(7, 7, 135));
+    animation:
+    tail $shooting-time ease-in-out infinite,
+    shooting $shooting-time ease-in-out infinite;
+
+    &::before { 
+        content: '';
+        position:absolute;
+        top: calc(50% - 1px);
+        right: 0;
+        height:2px;
+        background: linear-gradient(-45deg, rgba(58, 167, 226, 0), rgba(33, 96, 130, 1)), rgba(58, 226, 212, 0);
+        transform: translateX(50%) rotate(45def);
+        border-radius: 100%;
+        animation: shining $shooting-time ease-in-out infinite;
+
+    }
+
+    &::after { 
+        content: '';
+        position:absolute;
+        top: calc(50% - 1px);
+        right: 0;
+        height:2px;
+        background: linear-gradient(-45deg, rgba(58, 167, 226, 0), rgba(33, 96, 130, 1)), rgba(58, 226, 212, 0);
+        transform: translateX(50%) rotate(-45def);
+        border-radius: 100%;
+        animation: shining $shooting-time ease-in-out infinite;
+
+    }
+
+    @for $i from 1 through 20 {
+        &:nth-child(#{$i}) {
+            $delay: random(9999) + 0ms;
+            top: calc(50% - #{random(400) - 200px});
+            top: calc(50% - #{random(300) + 0px});
+            animation-delay: $delay;
+            &::before,
+            &::after {
+                animation-delay: $delay;
+            }
+        }
+    }
+
+}
+
+@keyframes tail {
+    0% {
+        width:0;
+    }
+    30% {
+        width: 100px;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes shining {
+    0% {
+        width:0;
+    }
+    30% {
+        width: 30px;
+    }
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes shooting {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(300px);
+    }
+}

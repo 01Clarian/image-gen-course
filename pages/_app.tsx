@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import {useState, useEffect} from 'react';
 import "./App.css";
+import "./App.scss";
 import { Configuration, OpenAIApi } from 'openai';
 import getConfig from 'next/config';
 
@@ -11,6 +12,11 @@ export default function App({ Component, pageProps }: AppProps) {
   const [loading, setLoading] = useState(false);
   const [typedText, setTypedText] = useState("");
   const text = "Creating image...Please Wait...";
+
+  const stars = [];
+  for(let i = 0; i < 20; i++) {
+    stars.push(<div className="shooting_star" key={i}></div>)
+  }
 
   const { publicRuntimeConfig } = getConfig();
   const apiKey = (typeof publicRuntimeConfig !== 'undefined' && publicRuntimeConfig.apiKey) ? publicRuntimeConfig.apiKey : process.env.API_KEY;
@@ -59,6 +65,7 @@ export default function App({ Component, pageProps }: AppProps) {
   }
 
   return <div className="app-main">
+    {stars}
     <h2>Create Images With Your Imagination</h2>
     <textarea
       className="app-input"
